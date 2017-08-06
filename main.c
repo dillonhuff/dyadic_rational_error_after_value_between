@@ -84,6 +84,8 @@ void print_copy_values(lp_value_t const * all_roots, size_t const num_values) {
     printf("copy has value = ");
     lp_value_print(&dummy, stdout);
     printf("\n");
+
+    lp_value_destruct(&dummy);
   }
 
 }
