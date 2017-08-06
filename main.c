@@ -63,22 +63,36 @@ lp_value_t* dyadic_rational_normalization_error_roots() {
   return roots;
 }
 
-void test_constant_conic_sections_unlifted() {
+void print_copy_values(lp_value_t const * all_roots, size_t const num_values) {
+  for (size_t i = 0; i < num_values; i++) {
+    printf("copying value %zu with type %u = ", i, all_roots[i].type);
+    lp_value_print(&(all_roots[i]), stdout);
+    printf("\n");
+    printf("double approximation = %f\n", lp_value_to_double(&(all_roots[i])));
+
+    lp_value_t dummy;
+    lp_value_construct_copy(&dummy, &(all_roots[i]));
+  }
+
+}
+
+void test_value_copying() {
 
   size_t num_roots = 3;
   lp_value_t* all_roots = dyadic_rational_normalization_error_roots();
 
-  for (size_t i = 0; i < num_roots; i++) {
-    printf("copying value %zu with type %u = ", i, all_roots[i].type);
-    lp_value_print(&(all_roots[i]), stdout);
-    printf("\n");
+  print_copy_values(all_roots, num_roots);
 
-    lp_value_t dummy;
-    lp_value_construct_copy(&dummy, &(all_roots[i]));
-    
-  }
+  /* for (size_t i = 0; i < num_roots; i++) { */
+  /*   printf("copying value %zu with type %u = ", i, all_roots[i].type); */
+  /*   lp_value_print(&(all_roots[i]), stdout); */
+  /*   printf("\n"); */
 
-  printf("Copied all roots before using lp_value_get_value_between\n");
+  /*   lp_value_t dummy; */
+  /*   lp_value_construct_copy(&dummy, &(all_roots[i])); */
+  /* } */
+
+  printf("----- Copied all roots before using lp_value_get_value_between\n\n");
   
   // First iteration
   lp_value_t current = all_roots[0];
@@ -106,11 +120,10 @@ void test_constant_conic_sections_unlifted() {
     
   }
 
-  printf("Copied all roots after using lp_value_get_value_between DONE\n");
+  printf("----- Copied all roots after using lp_value_get_value_between DONE\n\n");
 
 }
 
 int main() {
-  test_constant_conic_sections_unlifted();
-
+  test_value_copying();
 }
