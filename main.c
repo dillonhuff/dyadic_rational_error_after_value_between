@@ -15,10 +15,6 @@ lp_value_t* dyadic_rational_normalization_error_roots() {
   lp_value_t* roots =
     (lp_value_t*) malloc(sizeof(lp_value_t) * 2);
 
-  /* lp_rational_t five_halves; */
-  /* lp_rational_construct_from_int(&five_halves, -5, 2); */
-  /* lp_value_construct(&(roots[0]), LP_VALUE_RATIONAL, &five_halves); */
-
   lp_upolynomial_t* x2 = lp_upolynomial_construct_power(lp_Z, 2, 3);
   lp_upolynomial_t* mx = lp_upolynomial_construct_power(lp_Z, 1, -1);
   lp_upolynomial_t* mone = lp_upolynomial_construct_power(lp_Z, 0, -1);
@@ -63,9 +59,13 @@ lp_value_t* dyadic_rational_normalization_error_roots() {
 
   lp_dyadic_rational_destruct(&num);
   lp_dyadic_rational_destruct(&denum);
+
+  lp_dyadic_interval_destruct(&it);
   
   lp_dyadic_rational_destruct(&num_2);
   lp_dyadic_rational_destruct(&denum_2);
+
+  lp_dyadic_interval_destruct(&it_2);
 
   return roots;
 }
