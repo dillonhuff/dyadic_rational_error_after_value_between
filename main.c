@@ -15,7 +15,7 @@ lp_value_t* dyadic_rational_normalization_error_roots() {
     (lp_value_t*) malloc(sizeof(lp_value_t)*3);
 
   lp_rational_t five_halves;
-  lp_rational_construct_from_int(&five_halves, 5, 2);
+  lp_rational_construct_from_int(&five_halves, -5, 2);
   lp_value_construct(&(roots[0]), LP_VALUE_RATIONAL, &five_halves);
 
   lp_upolynomial_t* x2 = lp_upolynomial_construct_power(lp_Z, 2, 3);
@@ -72,6 +72,10 @@ void print_copy_values(lp_value_t const * all_roots, size_t const num_values) {
 
     lp_value_t dummy;
     lp_value_construct_copy(&dummy, &(all_roots[i]));
+
+    printf("copy has value = ");
+    lp_value_print(&dummy, stdout);
+    printf("\n");
   }
 
 }
@@ -82,15 +86,6 @@ void test_value_copying() {
   lp_value_t* all_roots = dyadic_rational_normalization_error_roots();
 
   print_copy_values(all_roots, num_roots);
-
-  /* for (size_t i = 0; i < num_roots; i++) { */
-  /*   printf("copying value %zu with type %u = ", i, all_roots[i].type); */
-  /*   lp_value_print(&(all_roots[i]), stdout); */
-  /*   printf("\n"); */
-
-  /*   lp_value_t dummy; */
-  /*   lp_value_construct_copy(&dummy, &(all_roots[i])); */
-  /* } */
 
   printf("----- Copied all roots before using lp_value_get_value_between\n\n");
   
