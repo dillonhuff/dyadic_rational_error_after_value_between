@@ -90,18 +90,9 @@ void test_value_copying() {
   print_copy_values(all_roots, num_roots);
 
   printf("----- Copied all roots before using lp_value_get_value_between\n\n");
-  
-  // First iteration
-  /* lp_value_t current = all_roots[0]; */
-  /* lp_value_t next = all_roots[0 + 1]; */
 
-  /* lp_value_t btwn; */
-  /* lp_value_construct_none(&btwn); */
-  /* lp_value_get_value_between(&current, 1, &next, 1, &btwn); */
-
-  // Second iteration
-  lp_value_t current1 = all_roots[0]; //1];
-  lp_value_t next1 = all_roots[1]; //1 + 1];
+  lp_value_t current1 = all_roots[0];
+  lp_value_t next1 = all_roots[1];
 
   lp_value_t btwn1;
   lp_value_construct_none(&btwn1);
