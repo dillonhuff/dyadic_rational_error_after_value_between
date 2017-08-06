@@ -11,12 +11,13 @@
 #include <poly/poly.h>
 
 lp_value_t* dyadic_rational_normalization_error_roots() {
+  
   lp_value_t* roots =
-    (lp_value_t*) malloc(sizeof(lp_value_t)*3);
+    (lp_value_t*) malloc(sizeof(lp_value_t) * 2);
 
-  lp_rational_t five_halves;
-  lp_rational_construct_from_int(&five_halves, -5, 2);
-  lp_value_construct(&(roots[0]), LP_VALUE_RATIONAL, &five_halves);
+  /* lp_rational_t five_halves; */
+  /* lp_rational_construct_from_int(&five_halves, -5, 2); */
+  /* lp_value_construct(&(roots[0]), LP_VALUE_RATIONAL, &five_halves); */
 
   lp_upolynomial_t* x2 = lp_upolynomial_construct_power(lp_Z, 2, 3);
   lp_upolynomial_t* mx = lp_upolynomial_construct_power(lp_Z, 1, -1);
@@ -37,7 +38,7 @@ lp_value_t* dyadic_rational_normalization_error_roots() {
 
   lp_algebraic_number_t algnum_1;
   lp_algebraic_number_construct(&algnum_1, poly, &it);
-  lp_value_construct(&(roots[1]), LP_VALUE_ALGEBRAIC, &algnum_1);
+  lp_value_construct(&(roots[0]), LP_VALUE_ALGEBRAIC, &algnum_1);
 
 
   lp_upolynomial_t* x2_2 = lp_upolynomial_construct_power(lp_Z, 2, 61);
@@ -58,7 +59,7 @@ lp_value_t* dyadic_rational_normalization_error_roots() {
 
   lp_algebraic_number_t algnum_2;
   lp_algebraic_number_construct(&algnum_2, poly_2, &it_2);
-  lp_value_construct(&(roots[2]), LP_VALUE_ALGEBRAIC, &algnum_2);
+  lp_value_construct(&(roots[1]), LP_VALUE_ALGEBRAIC, &algnum_2);
 
   return roots;
 }
@@ -83,7 +84,7 @@ void print_copy_values(lp_value_t const * all_roots, size_t const num_values) {
 
 void test_value_copying() {
 
-  size_t num_roots = 3;
+  size_t num_roots = 2;
   lp_value_t* all_roots = dyadic_rational_normalization_error_roots();
 
   print_copy_values(all_roots, num_roots);
@@ -99,8 +100,8 @@ void test_value_copying() {
   /* lp_value_get_value_between(&current, 1, &next, 1, &btwn); */
 
   // Second iteration
-  lp_value_t current1 = all_roots[1];
-  lp_value_t next1 = all_roots[1 + 1];
+  lp_value_t current1 = all_roots[0]; //1];
+  lp_value_t next1 = all_roots[1]; //1 + 1];
 
   lp_value_t btwn1;
   lp_value_construct_none(&btwn1);
