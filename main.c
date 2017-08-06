@@ -61,6 +61,12 @@ lp_value_t* dyadic_rational_normalization_error_roots() {
   lp_algebraic_number_construct(&algnum_2, poly_2, &it_2);
   lp_value_construct(&(roots[1]), LP_VALUE_ALGEBRAIC, &algnum_2);
 
+  lp_dyadic_rational_destruct(&num);
+  lp_dyadic_rational_destruct(&denum);
+  
+  lp_dyadic_rational_destruct(&num_2);
+  lp_dyadic_rational_destruct(&denum_2);
+
   return roots;
 }
 
@@ -94,6 +100,7 @@ void test_value_copying() {
   lp_value_t current1 = all_roots[0];
   lp_value_t next1 = all_roots[1];
 
+  printf("----- Finding value between the two algebraic numbers\n");
   lp_value_t btwn1;
   lp_value_construct_none(&btwn1);
   lp_value_get_value_between(&current1, 1, &next1, 1, &btwn1);
@@ -101,12 +108,16 @@ void test_value_copying() {
   printf("Between value = ");
   lp_value_print(&btwn1, stdout);
   printf("\n");
-  printf("double approximation = %f\n", lp_value_to_double(&btwn1));
+  printf("double approximation = %f\n\n", lp_value_to_double(&btwn1));
 
   print_copy_values(all_roots, num_roots);
 
   printf("----- Copied all roots after using lp_value_get_value_between DONE\n\n");
 
+  lp_value_destruct(&btwn1);
+
+  lp_value_destruct(&(all_roots[0]));
+  lp_value_destruct(&(all_roots[1]));
   free(all_roots);
 }
 
