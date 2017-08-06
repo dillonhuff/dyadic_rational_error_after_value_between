@@ -71,6 +71,7 @@ void print_copy_values(lp_value_t const * all_roots, size_t const num_values) {
     printf("double approximation = %f\n", lp_value_to_double(&(all_roots[i])));
 
     lp_value_t dummy;
+    lp_value_construct_none(&dummy);
     lp_value_construct_copy(&dummy, &(all_roots[i]));
 
     printf("copy has value = ");
@@ -90,33 +91,31 @@ void test_value_copying() {
   printf("----- Copied all roots before using lp_value_get_value_between\n\n");
   
   // First iteration
-  lp_value_t current = all_roots[0];
-  lp_value_t next = all_roots[0 + 1];
+  /* lp_value_t current = all_roots[0]; */
+  /* lp_value_t next = all_roots[0 + 1]; */
 
-  lp_value_t btwn;
-  lp_value_construct_none(&btwn);
-  lp_value_get_value_between(&current, 1, &next, 1, &btwn);
+  /* lp_value_t btwn; */
+  /* lp_value_construct_none(&btwn); */
+  /* lp_value_get_value_between(&current, 1, &next, 1, &btwn); */
 
   // Second iteration
-  current = all_roots[1];
-  next = all_roots[1 + 1];
+  lp_value_t current1 = all_roots[1];
+  lp_value_t next1 = all_roots[1 + 1];
 
   lp_value_t btwn1;
   lp_value_construct_none(&btwn1);
-  lp_value_get_value_between(&current, 1, &next, 1, &btwn1);
+  lp_value_get_value_between(&current1, 1, &next1, 1, &btwn1);
 
-  for (size_t i = 0; i < num_roots; i++) {
-    printf("copying value %zu with type %u = ", i, all_roots[i].type);
-    lp_value_print(&(all_roots[i]), stdout);
-    printf("\n");
+  printf("Between value = ");
+  lp_value_print(&btwn1, stdout);
+  printf("\n");
+  printf("double approximation = %f\n", lp_value_to_double(&btwn1));
 
-    lp_value_t dummy;
-    lp_value_construct_copy(&dummy, &(all_roots[i]));
-    
-  }
+  print_copy_values(all_roots, num_roots);
 
   printf("----- Copied all roots after using lp_value_get_value_between DONE\n\n");
 
+  free(all_roots);
 }
 
 int main() {
