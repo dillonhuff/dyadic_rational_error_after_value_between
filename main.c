@@ -1,7 +1,6 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
      
 #include <poly/assignment.h>
 #include <poly/polynomial.h>
@@ -81,87 +80,21 @@ void test_constant_conic_sections_unlifted() {
 
   printf("Copied all roots before using lp_value_get_value_between\n");
   
-  /* printf("# of roots = %zu\n", num_roots); */
-
-  /* printf("root[0] with type %u = ", all_roots[0].type); */
-  /* lp_value_print(&(all_roots[0]), stdout); */
-  /* printf("\n"); */
-
-  /* printf("root[1] with type %u = ", all_roots[1].type); */
-  /* lp_value_print(&(all_roots[1]), stdout); */
-  /* printf("\n"); */
-
-  /* printf("root[2] with type %u = ", all_roots[2].type); */
-  /* lp_value_print(&(all_roots[2]), stdout); */
-  /* printf("\n"); */
-  
-  /* assert(num_roots > 0); */
-
-  /* size_t num_test_points = 0; */
-  /* size_t* num_test_points_ptr = &num_test_points; */
-
-  /* *num_test_points_ptr = 2*num_roots + 1; */
-
   // First iteration
-
-  // Construct midpoint
   lp_value_t current = all_roots[0];
   lp_value_t next = all_roots[0 + 1];
-
-  printf("next value = ");
-  lp_value_print(&next, stdout);
-  printf("\n");
-
-  printf("checking root normalization of\n");
-  printf("current = ");
-  lp_value_print(&current, stdout);
-  printf("\n");
-  printf("next = ");
-  lp_value_print(&current, stdout);
-  printf("\n");
-
-  /* printf("checking root %d for normalization before between value call\n", 0); */
-  /* if (is_algebraic(all_roots[0])) { */
-  /*   check_normalized(&(all_roots[0].value.a)); */
-  /* } */
 
   lp_value_t btwn;
   lp_value_construct_none(&btwn);
   lp_value_get_value_between(&current, 1, &next, 1, &btwn);
 
-  /* printf("checking root %d for normalization after between value\n", 0); */
-  /* if (is_algebraic(all_roots[0])) { */
-  /*   check_normalized(&(all_roots[0].value.a)); */
-  /* } */
-
   // Second iteration
-
-  // Construct midpoint
   current = all_roots[1];
   next = all_roots[1 + 1];
-
-  /* printf("next value = "); */
-  /* lp_value_print(&next, stdout); */
-  /* printf("\n"); */
-
-  /* printf("checking root normalization of\n"); */
-  /* printf("current = "); */
-  /* lp_value_print(&current, stdout); */
-  /* printf("\n"); */
-  /* printf("next = "); */
-  /* lp_value_print(&current, stdout); */
-  /* printf("\n"); */
 
   lp_value_t btwn1;
   lp_value_construct_none(&btwn1);
   lp_value_get_value_between(&current, 1, &next, 1, &btwn1);
-
-  /* printf("checking root %d for normalization after between value\n", 1); */
-  /* if (is_algebraic(all_roots[1])) { */
-  /*   check_normalized(&(all_roots[1].value.a)); */
-  /* } */
-
-  // end second iteration
 
   for (size_t i = 0; i < num_roots; i++) {
     printf("copying value %zu with type %u = ", i, all_roots[i].type);
