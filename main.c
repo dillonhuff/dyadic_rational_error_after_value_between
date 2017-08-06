@@ -57,6 +57,14 @@ lp_value_t* dyadic_rational_normalization_error_roots() {
   lp_algebraic_number_construct(&algnum_2, poly_2, &it_2);
   lp_value_construct(&(roots[1]), LP_VALUE_ALGEBRAIC, &algnum_2);
 
+  lp_upolynomial_delete(x2);
+  lp_upolynomial_delete(mx);
+  lp_upolynomial_delete(mone);
+
+  lp_upolynomial_delete(x2_2);
+  lp_upolynomial_delete(mx_2);
+  lp_upolynomial_delete(mone_2);
+
   lp_dyadic_rational_destruct(&num);
   lp_dyadic_rational_destruct(&denum);
 
